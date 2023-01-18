@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 import { useForm } from '../../hooks/useForm';
@@ -8,6 +8,29 @@ import Axios from 'axios';
 function AddInventory() {
 
     const [isShow, invokeModal] = useState(false);
+    const [families, setFamilies] = useState([]);
+    const [family, setFamily] = useState("");
+
+    useEffect(() => {
+
+        const getFamilies = async () => {
+            const url = "https://scouts-app-64ig4.ondigitalocean.app/api/family/";
+
+            const { token } = userInfo;
+
+            const config = {
+                headers: {
+                    'x-token': token
+                }
+            };
+
+            const { data } = await Axios.get(url, config);
+
+            setFamilies(data.families);
+        }
+        getFamilies();
+
+    }, []);
 
     const [formValues, handleInputChange] = useForm({
         name: '',
@@ -15,8 +38,7 @@ function AddInventory() {
         existence: '',
         quantity: 0,
         cost: 0,
-        sale_price: 0,
-        family_id: ''
+        sale_price: 0
     });
 
     const {
@@ -25,8 +47,7 @@ function AddInventory() {
         existence,
         quantity,
         cost,
-        sale_price,
-        family_id
+        sale_price
     } = formValues;
 
     const initModal = () => {
@@ -53,7 +74,7 @@ function AddInventory() {
             "quantity": quantity,
             "cost": cost,
             "sale_price": sale_price,
-            "family_id": family_id
+            "family_id": family
         };
 
         Axios.post(url, body, config)
@@ -62,6 +83,10 @@ function AddInventory() {
                     window.location.reload();
                 });
             });
+    }
+
+    const handleSelect=(e)=>{
+        setFamily(e);
     }
 
     return (
@@ -76,10 +101,25 @@ function AddInventory() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <Form>                        
+                    <Form>
                         <Form.Group className='mb-3'>
-                            <Form.Label>Familia ID</Form.Label>
-                            <Form.Control name="family_id" onChange={ handleInputChange } type='text' placeholder='Ingrese el ID de la familia'></Form.Control>
+                            <td>
+                                <DropdownButton 
+                                    alignRight
+                                    title="Familia"    
+                                    onSelect={handleSelect}                                                              
+                                    >                                
+
+                                    <Dropdown.Menu >
+                                        {
+                                            families.map( family => (
+                                                <Dropdown.Item key={ family._id } eventKey={ family._id } href="#/action-1">{ family.name }</Dropdown.Item>
+                                            ))
+                                        }
+                                    </Dropdown.Menu>
+                                </DropdownButton>
+                            </td>
+
                         </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label>Nombre</Form.Label>
