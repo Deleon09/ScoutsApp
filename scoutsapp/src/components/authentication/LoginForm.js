@@ -93,10 +93,6 @@ const LoginForm = () => {
                             <Form.Control name="password" onChange={ handleInputChange } type='password' placeholder='Ingresa la contraseña'></Form.Control>
                         </Form.Group>
                         <Form.Group className='mb-3'>
-                            <Form.Label>Olvido su Contraseña</Form.Label>
-                            <Form.Control type='password' placeholder='Ingresa la contraseña'></Form.Control>
-                        </Form.Group>
-                        <Form.Group className='mb-3'>
                             <Button onClick={ handleClick } variant='primary' >Ingresar</Button>
                         </Form.Group>
                     </Form>

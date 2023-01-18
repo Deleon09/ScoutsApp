@@ -130,10 +130,6 @@ function AddSales() {
                             <Form.Label>Receptor</Form.Label>
                             <Form.Control name="reciever_name" onChange={ handleInputChange } type='text' placeholder='Ingrese el nombre del receptor'></Form.Control>
                         </Form.Group>
-                        <Form.Group className='mb-3'>
-                            <Form.Label>Total</Form.Label>
-                            <Form.Control name="total_cost" onChange={ handleInputChange } type='text' placeholder='Ingrese el total'></Form.Control>
-                        </Form.Group>
                     </Form>
                 </Modal.Body>
 
