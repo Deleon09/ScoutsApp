@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Dropdown, DropdownButton } from 'react-bootstrap';
 
 import { useForm } from '../../hooks/useForm';
 import Swal from 'sweetalert';
@@ -12,6 +12,8 @@ function AddInventory() {
     const [family, setFamily] = useState("");
 
     useEffect(() => {
+
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
         const getFamilies = async () => {
             const url = "https://scouts-app-64ig4.ondigitalocean.app/api/family/";
