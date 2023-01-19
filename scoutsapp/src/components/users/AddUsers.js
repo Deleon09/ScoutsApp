@@ -44,6 +44,8 @@ function AddUsers() {
                 Swal("Success", "User Created!","success").then(() => {
                     window.location.reload();
                 });
+            }).catch(function (error) {
+                Swal( "Oops" ,  "Something went wrong!" ,  "error" )
             });
 
         } else {

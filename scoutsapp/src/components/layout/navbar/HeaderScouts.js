@@ -2,7 +2,6 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import Logo from '../../images/loginForm/navLogo.png';
 
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const HeaderScouts = () => {
 
@@ -40,9 +39,11 @@ const HeaderScouts = () => {
                 </Navbar.Collapse>
             </Container>
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
-                    <Nav.Link onClick={logout}>Logout</Nav.Link>
-                </Nav>
+                { token &&  
+                    <Nav className="ml-auto">
+                        <Nav.Link onClick={logout}>Logout</Nav.Link>
+                    </Nav>
+                }               
             </Navbar.Collapse>
             <Navbar.Brand href="/login">
                 <img
